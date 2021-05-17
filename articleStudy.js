@@ -14,23 +14,15 @@ function articleStudy () {
   //循环6次，每次1分钟
   for (var i = 0; i < 6; i++) {
     if (click(s, i)) {
-      for (var i = 0; i < 5; i++) {
-        swipe(x, h1, x, h2, 500);//往下翻
-        utils.delay(3)
-        console.log('文章浏览' + (i + 3) + '秒');
-      }
-      // article_timing(i, 60)
-      continue
+      article_timing(i, 60)
+      back()
+      utils.delay(3)
     } else {
       swipe(x, h1, x, h2, 500);//往下翻（纵坐标从5/6处滑到1/6处）
       click(s, i)
-      // article_timing(i, 60)
-      // for (var i = 0; i < 5; i++) {
-      //   swipe(x, h1, x, h2, 500);//往下翻（纵坐标从5/6处滑到1/6处）
-      //   utils.delay(3)
-      //   console.log('文章浏览' + (i + 3) + '秒');
-      // }
-      continue
+      article_timing(i, 60)
+      back()
+      utils.delay(3)
     }
 
   }
@@ -51,11 +43,11 @@ function articleStudy () {
     h1 = (h / 6) * 5;
     h2 = (h / 6);
     for (var i = 0; i < seconds; i++) {
-      while (!textContains("欢迎发表你的观点").exists())//如果离开了文章界面则一直等待
-      {
-        console.error("当前已离开第" + (n + 1) + "文章界面，请重新返回文章页面...");
-        utils.delay(2);
-      }
+      // while (!textContains("欢迎发表你的观点").exists())//如果离开了文章界面则一直等待
+      // {
+      //   console.error("当前已离开第" + (n + 1) + "文章界面，请重新返回文章页面...");
+      //   utils.delay(2);
+      // }
       if (i % 5 == 0)//每5秒打印一次学习情况
       {
         console.info("第" + (n + 1) + "篇文章已经学习" + (i + 1) + "秒,剩余" + (seconds - i - 1) + "秒!");
