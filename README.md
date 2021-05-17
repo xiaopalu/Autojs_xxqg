@@ -11,7 +11,7 @@
 
 # 开发文档
 
-- 本软件使用模块化开发，具体的开发文档可以参考：htts://www.frontblog.top/autojs
+- 本软件使用模块化开发，具体的开发文档可以参考：https://www.frontblog.top/autojs
 - 欢迎提出Issues，技术上的探讨。
 
 # 更新日志
