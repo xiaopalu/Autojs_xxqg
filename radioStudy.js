@@ -12,6 +12,18 @@ function radioStudy () {
   desc("工作").click();//点击主页正下方的"学习"按钮
   utils.delay(3)
 }
+function stopradioStudy () {
+  click('电台')
+  utils.delay(2)
+  click('听广播')
+  utils.delay(3)
+  click('经济之声')
+  utils.delay(2)
+  id("v_play").findOnce(0).click();//点击暂停播放按钮
+  console.log('暂停广播');
+  utils.delay(3)
+  back()
+}
 /**
  * 广播需要收听时间
  * @param {*} r_time -已经收听的时间
@@ -31,4 +43,5 @@ function radio_timing (r_time, seconds) {
   }
 }
 // export default (radioStudy)
-module.exports = radioStudy;
+exports.radioStudy = radioStudy;
+exports.stopradioStudy = stopradioStudy

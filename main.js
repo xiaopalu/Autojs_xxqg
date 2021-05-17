@@ -14,8 +14,9 @@ function main () {
     return
   }
   start()//启动app
-  radioStudy()//学习电台
+  radioStudy.radioStudy()//学习电台
   articleStudy()//文章学习
+  radioStudy.stopradioStudy()//暂停广播
 }
 
 
