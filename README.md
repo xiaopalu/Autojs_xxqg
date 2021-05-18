@@ -18,6 +18,10 @@
 
 Autojs4.1.1版本下载：http://a7.0098118.com/hyt6/autojs.apk
 
+# 公告
+
+- 由于Github推送大文件较慢，经常推送失败，后续将打包文件将存放在：https://www.frontblog.top/autojstype/
+
 # 开发文档
 
 - 本项目使用模块化开发，具体的开发文档可以参考：https://www.frontblog.top/autojs
