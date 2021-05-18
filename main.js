@@ -1,14 +1,16 @@
 "ui";
 //引入各个功能模块
-var start = require('./start')
-var radioStudy = require('./radioStudy');
-var articleStudy = require('./articleStudy')
-
-var xxqg = getPackageName("学习强国");
+var start = require('./start') //启动app
+var radioStudy = require('./radioStudy');//电台学习
+var articleStudy = require('./articleStudy') //文章学习
+var challenge = require('./challengeanswer') //挑战答题
+var study = require('./study')
 ui.layout(
   <vertical>
     <text id="myText" line="3" textStyle="bold" marginTop="162px" textSize="30sp" />
     <button style="Widget.AppCompat.Button.Colored" text="默认执行" id="start" />
+    <button style="Widget.AppCompat.Button.Colored" text="挑战答题" id="challenge" />
+    <button style="Widget.AppCompat.Button.Colored" text="训练题库" id="study" />
     <button style="Widget.AppCompat.Button.Colored"
       text="开启无障碍"
       id="auto" />
@@ -28,17 +30,13 @@ ui.start.click(function () {
     console.show();
     console.log('脚本开始运行，期间不要中断程序');
     main()
-    function main () {
-      if (!(app.launchPackage(xxqg))) {
-        console.log('找不到应用');
-        return
-      }
-      start()//启动app
-      radioStudy.radioStudy()//学习电台
-      articleStudy()//文章学习
-      radioStudy.stopradioStudy()//暂停广播
-    }
   });
+  function main () {
+    start()//启动app
+    radioStudy.radioStudy()//学习电台
+    articleStudy()//文章学习
+    radioStudy.stopradioStudy()//暂停广播
+  }
 })
 ui.Suspended.click(function () {
   app.startActivity({
@@ -55,6 +53,20 @@ ui.auto.click(function () {
       action: "android.settings.ACCESSIBILITY_SETTINGS"
     });
   }
+})
+ui.challenge.click(function () {
+  toast('点击')
+  threads.start(function () {
+    console.show();
+    challenge.challengeanswer()
+  })
+
+})
+ui.study.click(function () {
+  threads.start(function () {
+    console.show();
+    study.study()
+  })
 })
 
 
