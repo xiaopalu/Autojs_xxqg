@@ -48,7 +48,7 @@ ui.Suspended.click(function () {
   })
 })
 ui.auto.click(function () {
-  toast('已经启动')
+  toast('已经开启无障碍模式')
   // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
   if (auto.service == null) {
     app.startActivity({

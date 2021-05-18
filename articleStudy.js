@@ -12,11 +12,24 @@ function articleStudy () {
   console.log('以日期开始点击' + date);
   //6篇文章，每一篇1分钟，相当于12积分
   for (var i = 0, t = 0; i < 6;) {
+    //这里判断是否点击到文章
     if (click(date, t)) {
-      article_timing(i, 60)
-      i++;
-      t++;
-      back()
+      utils.delay(2)
+      //这里判断是否时文章页面 是-》退出、下划，否-》浏览，次数+1，退出
+      if (text("展开").exists()) {
+        utils.delay(2)
+        console.log('非文章界面，退出');
+        back()
+        console.log('往下划');
+        utils.delay(1)
+        swipe(x, h1, x, h2, 500);//往下翻（纵坐标从5/6处滑到1/6处）
+        utils.delay(3)
+      } else {
+        article_timing(i, 60)
+        i++;
+        console.log(t);
+        back()
+      }
     } else {
       console.log('往下划');
       swipe(x, h1, x, h2, 500);//往下翻（纵坐标从5/6处滑到1/6处）
