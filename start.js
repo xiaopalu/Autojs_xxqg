@@ -4,9 +4,9 @@ var utils = require('./utils')
  * 启动app,初始化
  */
 function start () {
+  console.log('请等待6秒时间...');
   utils.delay(6)
   var num = device.width//获取屏幕的宽度
-  utils.test()
   utils.delay(1)
   console.log(num);
   click('我的')

@@ -6,7 +6,13 @@ function radioStudy () {
   utils.delay(2)
   click('听广播')
   utils.delay(3)
-  click('经济之声')//这里需要判断，如果用户之前就停留在这个tag，那么此时页面有3个这样的文字
+  click('经济之声')
+  utils.delay(2)
+  //这里判断是否弹出了播放的按钮，弹出的话需要加入返回的操作
+  if (id("v_play").findOnce(0)) {
+    console.log('开始收听广播中...');
+    back()
+  }
   console.log('开始收听广播');
   utils.delay(4)
   desc("工作").click();//点击主页正下方的"学习"按钮
