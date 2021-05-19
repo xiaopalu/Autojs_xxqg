@@ -23,7 +23,7 @@ function articleStudy () {
         console.log('往下划');
         utils.delay(1)
         swipe(x, h1, x, h2, 500);//往下翻（纵坐标从5/6处滑到1/6处）
-        utils.delay(3)
+        utils.delay(2)
       } else {
         article_timing(i, 60)
         i++;

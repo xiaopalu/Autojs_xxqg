@@ -30,24 +30,6 @@ function stopradioStudy () {
   utils.delay(3)
   back()
 }
-/**
- * 广播需要收听时间
- * @param {*} r_time -已经收听的时间
- * @param {*} seconds -学习秒数
- */
-function radio_timing (r_time, seconds) {
-  for (var i = 0; i < seconds; i++) {
-    sleep(1000);
-    if (i % 5 == 0)//每5秒打印一次信息
-    {
-      console.info("广播已经收听" + (i + 1 + r_time) + "秒,剩余" + (seconds - i - 1) + "秒!");
-    }
-    if (i % 15 == 0)//每15秒弹一次窗防止息屏
-    {
-      toast("这是防息屏弹窗，可忽略-. -");
-    }
-  }
-}
 // export default (radioStudy)
 exports.radioStudy = radioStudy;
 exports.stopradioStudy = stopradioStudy

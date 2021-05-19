@@ -1,3 +1,4 @@
+
 /**
  * @param {number} 睡眠时间 
  */
@@ -7,7 +8,7 @@ function delay (seconds) {
 /**
  * @description: 获取当天日期
  * @param: null
- * @return: s 日期字符串 "2020 xx xx"
+ * @return: s 日期字符串 
  */
 function getTodayDateString () {
   var date = new Date();

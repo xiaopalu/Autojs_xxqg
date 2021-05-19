@@ -4,7 +4,8 @@ var start = require('./start') //启动app
 var radioStudy = require('./radioStudy');//电台学习
 var articleStudy = require('./articleStudy') //文章学习
 var challenge = require('./challengeanswer') //挑战答题
-var study = require('./study')
+var study = require('./study')//训练题库-》挑战答题
+var utils = require('./utils')
 ui.layout(
   <vertical>
     <text id="myText" line="3" textStyle="bold" marginTop="162px" textSize="30sp" />
@@ -45,6 +46,7 @@ ui.Suspended.click(function () {
     data: "package:" + context.getPackageName(),
   })
 })
+
 ui.auto.click(function () {
   toast('已经开启无障碍模式')
   // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
@@ -58,9 +60,11 @@ ui.challenge.click(function () {
   toast('点击')
   threads.start(function () {
     console.show();
-    challenge.challengeanswer()
+    console.log('暂时不开放，题库在完善中，可以联系作者，不断训练题库，优化题库，贡献题库');
+    utils.delay(3)
+    console.hide()
+    // challenge.challengeanswer()
   })
-
 })
 ui.study.click(function () {
   threads.start(function () {
