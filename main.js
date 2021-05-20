@@ -111,17 +111,17 @@ ui.study.click(function () {
 })
 ui.radiotest.click(function () {
   threads.start(function () {
-    // toastLog('勿点击...')
-    console.show();
-    var xxqg = getPackageName("学习强国");
-    if (!(app.launchPackage(xxqg))) {
-      console.log('找不到应用');
-      return
-    }
-    while (!id("home_bottom_tab_button_work").exists());//等待加载出主页
-    console.log('加载到主页啦啦啦啦');
-    utils.delay(2)
-    radioStudy.radioStudy()
+    toastLog('勿点击...')
+    // console.show();
+    // var xxqg = getPackageName("学习强国");
+    // if (!(app.launchPackage(xxqg))) {
+    //   console.log('找不到应用');
+    //   return
+    // }
+    // while (!id("home_bottom_tab_button_work").exists());//等待加载出主页
+    // console.log('加载到主页啦啦啦啦');
+    // utils.delay(2)
+    // radioStudy.radioStudy()
   })
 })
 // 创建选项菜单(右上角)
