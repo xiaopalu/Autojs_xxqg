@@ -8,15 +8,15 @@ function delay (seconds) {
 /**
  * @description: 获取当天日期
  * @param: null
- * @return: s 日期字符串 
+ * @return: str 日期字符串 
  */
 function getTodayDateString () {
   var date = new Date();
   var y = date.getFullYear();
   var m = date.getMonth();
   var d = date.getDate();
-  var s = dateToString(y, m, d);//年，月，日
-  return s
+  var str = dateToString(y, m, d);//年，月，日
+  return str
 }
 function dateToString (y, m, d) {
   var year = y.toString();
@@ -30,8 +30,8 @@ function dateToString (y, m, d) {
   } else {
     var day = d.toString();
   }
-  var s = year + "-" + month + "-" + day;//年-月-日
-  return s;
+  var str = year + "-" + month + "-" + day;//年-月-日
+  return str;
 }
 
 function test () {

@@ -1,11 +1,15 @@
 var utils = require('./utils')
 
+//手机屏幕相关数据
+var h = device.height;//屏幕高
+var w = device.width;//屏幕宽
+var x = (w / 3) * 2;//横坐标2分之3处
+var h1 = (h / 6) * 5;//纵坐标6分之5处
+var h2 = (h / 6);//纵坐标6分之1处
+/**
+ * 浏览文章模块
+ */
 function articleStudy () {
-  let h = device.height;//屏幕高
-  let w = device.width;//屏幕宽
-  let x = (w / 3) * 2;//横坐标2分之3处
-  let h1 = (h / 6) * 5;//纵坐标6分之5处
-  let h2 = (h / 6);//纵坐标6分之1处
   click('推荐')
   utils.delay(3)
   var date = utils.getTodayDateString();//获取当天日期字符串
@@ -16,6 +20,7 @@ function articleStudy () {
     if (click(date, t)) {
       utils.delay(2)
       //这里判断是否时文章页面 是-》退出、下划，否-》浏览，次数+1，退出
+      //单纯判断是否为展开不能解决问题
       if (text("展开").exists()) {
         utils.delay(2)
         console.log('非文章界面，退出');
@@ -45,16 +50,10 @@ function articleStudy () {
    */
 function article_timing (n, seconds) {
   //随机阅读文章的时间
-  seconds = parseInt(seconds);
+  var seconds = parseInt(seconds);
   var randNum = random(0, 5);
-  randNum = parseInt(randNum);
-  seconds = seconds + randNum;
-
-  h = device.height;//屏幕高
-  w = device.width;//屏幕宽
-  x = (w / 3) * 2;
-  h1 = (h / 6) * 5;
-  h2 = (h / 6);
+  var randNum = parseInt(randNum);
+  var seconds = seconds + randNum;
 
   for (var i = 0; i < seconds; i++) {
     if (i % 5 == 0)//每5秒打印一次学习情况

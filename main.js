@@ -3,12 +3,10 @@
 var start = require('./start') //启动app
 var radioStudy = require('./radioStudy');//电台学习
 var articleStudy = require('./articleStudy') //文章学习
-var challenge = require('./challengeanswer') //挑战答题
-var study = require('./study')//训练题库-》挑战答题
-var utils = require('./utils')//工具类
+var utils = require('./utils')
 //这里color不能删除，定义tint的颜色
 var color = "#009688";
-
+//UI模块
 ui.layout(
   <drawer id="drawer">
     <vertical>
@@ -32,6 +30,7 @@ ui.layout(
             <text textColor="red" textSize="16sp" id="testxText" />
             <button style="Widget.AppCompat.Button.Colored" text="挑战答题" id="challenge" />
             <button style="Widget.AppCompat.Button.Colored" text="训练题库" id="study" />
+            <button style="Widget.AppCompat.Button.Colored" text="电台随机测试" id="radiotest" />
           </vertical>
         </frame>
         <frame>
@@ -51,8 +50,81 @@ ui.layout(
   </drawer>
 );
 
-
-//创建选项菜单(右上角)
+//文字设置
+ui.indexText.setText("执行之前请确定开启无障碍模式和悬浮窗权限\n默认执行目前支持电台和浏览文章共计18分");
+ui.testxText.setText("这是测试功能，开发人员使用，存在很大Bug，慎重使用")
+ui.explainText.setText("本软件目前开源免费\n付款既被骗\n不得传播扩散使用\n仅供个人学习AutoJS使用\n开源地址：https://github.com/LSFCXZ/Autojs_xxqg")
+/**
+ * 首页模块
+ */
+//默认执行事件
+ui.start.click(function () {
+  //这里应该加入对悬浮窗的判断
+  if (auto.service == null) {
+    toastLog("请先开启无障碍服务！");
+    return;
+  };
+  threads.start(function () {
+    console.show();
+    console.log('脚本开始运行，期间请不要中断程序');
+    main()
+  });
+  function main () {
+    start()
+    radioStudy.radioStudy()
+    articleStudy()
+    radioStudy.stopradioStudy()
+  }
+})
+//开启悬浮窗
+ui.Suspended.click(function () {
+  app.startActivity({
+    packageName: "com.android.settings",
+    className: "com.android.settings.Settings$AppDrawOverlaySettingsActivity",
+    data: "package:" + context.getPackageName(),
+  })
+})
+//开启无障碍模式
+ui.auto.click(function () {
+  toast('已经开启无障碍模式')
+  // 用户没有勾选无障碍服务的选项时，跳转到页面让用户去开启
+  if (auto.service == null) {
+    app.startActivity({
+      action: "android.settings.ACCESSIBILITY_SETTINGS"
+    });
+  }
+})
+/**
+ * 测试功能模块
+ */
+//挑战答题
+ui.challenge.click(function () {
+  threads.start(function () {
+    toastLog('正在十万火急开发中...')
+  })
+})
+//训练题库
+ui.study.click(function () {
+  threads.start(function () {
+    toastLog('正在十万火急开发中...')
+  })
+})
+ui.radiotest.click(function () {
+  threads.start(function () {
+    // toastLog('勿点击...')
+    console.show();
+    var xxqg = getPackageName("学习强国");
+    if (!(app.launchPackage(xxqg))) {
+      console.log('找不到应用');
+      return
+    }
+    while (!id("home_bottom_tab_button_work").exists());//等待加载出主页
+    console.log('加载到主页啦啦啦啦');
+    utils.delay(2)
+    radioStudy.radioStudy()
+  })
+})
+// 创建选项菜单(右上角)
 ui.emitter.on("create_options_menu", menu => {
   menu.add("设置");
   menu.add("关于");
@@ -70,15 +142,12 @@ ui.emitter.on("options_item_selected", (e, item) => {
   e.consumed = true;
 });
 activity.setSupportActionBar(ui.toolbar);
-
 //设置滑动页面的标题
 ui.viewpager.setTitles(["首页", "测试功能", "声明"]);
 //让滑动页面和标签栏联动
 ui.tabs.setupWithViewPager(ui.viewpager);
-
 //让工具栏左上角可以打开侧拉菜单
 ui.toolbar.setupWithDrawer(ui.drawer);
-
 ui.menu.setDataSource([
   {
     title: "选项一",
@@ -105,65 +174,4 @@ ui.menu.on("item_click", item => {
       ui.finish();
       break;
   }
-})
-//文字设置
-ui.indexText.setText("执行之前请确定开启无障碍模式和悬浮窗权限\n默认执行目前支持电台和浏览文章共计18分");
-ui.testxText.setText("这是测试功能，开发人员使用，存在很大Bug，慎重使用")
-ui.explainText.setText("本软件目前开源免费\n付款既被骗\n不得传播扩散使用\n仅供个人学习AutoJS使用\n开源地址：https://github.com/LSFCXZ/Autojs_xxqg")
-// 首页按钮点击事件
-//默认执行事件
-ui.start.click(function () {
-  //这里应该加入对悬浮窗的判断
-  if (auto.service == null) {
-    toastLog("请先开启无障碍服务！");
-    return;
-  };
-  threads.start(function () {
-    console.show();
-    console.log('脚本开始运行，期间请不要中断程序');
-    main()
-  });
-  function main () {
-    start()//启动app
-    radioStudy.radioStudy()//学习电台
-    articleStudy()//文章学习
-    radioStudy.stopradioStudy()//暂停广播
-  }
-})
-//开启悬浮窗
-ui.Suspended.click(function () {
-  app.startActivity({
-    packageName: "com.android.settings",
-    className: "com.android.settings.Settings$AppDrawOverlaySettingsActivity",
-    data: "package:" + context.getPackageName(),
-  })
-})
-//开启无障碍模式
-ui.auto.click(function () {
-  toast('已经开启无障碍模式')
-  // 用户没有勾选无障碍服务的选项时，跳转到页面让用户去开启
-  if (auto.service == null) {
-    app.startActivity({
-      action: "android.settings.ACCESSIBILITY_SETTINGS"
-    });
-  }
-})
-//测试功能模块
-//挑战答题
-ui.challenge.click(function () {
-  toast('点击')
-  threads.start(function () {
-    console.show();
-    console.log('暂时不开放，题库在完善中');
-    utils.delay(3)
-    console.hide()
-    // challenge.challengeanswer()
-  })
-})
-//训练题库
-ui.study.click(function () {
-  threads.start(function () {
-    console.show();
-    study.study()
-  })
 })
