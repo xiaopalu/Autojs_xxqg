@@ -19,11 +19,8 @@ ui.layout(
       <viewpager id="viewpager">
         <frame>
           <vertical>
-            <text text="第一页内容" textColor="black" textSize="16sp" id="myText" marginTop="120px" textSize="30sp" />
-            {/* <text id="myText" line="3" textStyle="bold" marginTop="162px" textSize="30sp" /> */}
+            <text textColor="black" textSize="16sp" id="indexText" />
             <button style="Widget.AppCompat.Button.Colored" text="默认执行" id="start" />
-            <button style="Widget.AppCompat.Button.Colored" text="挑战答题" id="challenge" />
-            <button style="Widget.AppCompat.Button.Colored" text="训练题库" id="study" />
             <button style="Widget.AppCompat.Button.Colored"
               text="开启无障碍"
               id="auto" />
@@ -31,10 +28,14 @@ ui.layout(
           </vertical>
         </frame>
         <frame>
-          <text text="第二页内容" textColor="red" textSize="16sp" />
+          <vertical>
+            <text textColor="red" textSize="16sp" id="testxText" />
+            <button style="Widget.AppCompat.Button.Colored" text="挑战答题" id="challenge" />
+            <button style="Widget.AppCompat.Button.Colored" text="训练题库" id="study" />
+          </vertical>
         </frame>
         <frame>
-          <text text="第三页内容" textColor="green" textSize="16sp" />
+          <text textColor="green" textSize="16sp" id="explainText" />
         </frame>
       </viewpager>
     </vertical>
@@ -100,14 +101,18 @@ ui.menu.setDataSource([
 ui.menu.on("item_click", item => {
   switch (item.title) {
     case "退出":
+      exit()
       ui.finish();
       break;
   }
 })
-ui.myText.setText("执行之前请确定开启无障碍模式和悬浮窗权限\n默认执行目前支持电台和浏览文章共计18分");
-// 按钮点击事件
+//文字设置
+ui.indexText.setText("执行之前请确定开启无障碍模式和悬浮窗权限\n默认执行目前支持电台和浏览文章共计18分");
+ui.testxText.setText("这是测试功能，开发人员使用，存在很大Bug，慎重使用")
+ui.explainText.setText("本软件目前开源免费\n付款既被骗\n不得传播扩散使用\n仅供个人学习AutoJS使用\n开源地址：https://github.com/LSFCXZ/Autojs_xxqg")
+// 首页按钮点击事件
+//默认执行事件
 ui.start.click(function () {
-  toast('点击')
   //这里应该加入对悬浮窗的判断
   if (auto.service == null) {
     toastLog("请先开启无障碍服务！");
@@ -115,7 +120,7 @@ ui.start.click(function () {
   };
   threads.start(function () {
     console.show();
-    console.log('脚本开始运行，期间不要中断程序');
+    console.log('脚本开始运行，期间请不要中断程序');
     main()
   });
   function main () {
@@ -125,6 +130,7 @@ ui.start.click(function () {
     radioStudy.stopradioStudy()//暂停广播
   }
 })
+//开启悬浮窗
 ui.Suspended.click(function () {
   app.startActivity({
     packageName: "com.android.settings",
@@ -132,36 +138,32 @@ ui.Suspended.click(function () {
     data: "package:" + context.getPackageName(),
   })
 })
-
+//开启无障碍模式
 ui.auto.click(function () {
   toast('已经开启无障碍模式')
-  // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
+  // 用户没有勾选无障碍服务的选项时，跳转到页面让用户去开启
   if (auto.service == null) {
     app.startActivity({
       action: "android.settings.ACCESSIBILITY_SETTINGS"
     });
   }
 })
+//测试功能模块
+//挑战答题
 ui.challenge.click(function () {
   toast('点击')
   threads.start(function () {
     console.show();
-    console.log('暂时不开放，题库在完善中，可以联系作者，不断训练题库，优化题库，贡献题库');
+    console.log('暂时不开放，题库在完善中');
     utils.delay(3)
     console.hide()
     // challenge.challengeanswer()
   })
 })
+//训练题库
 ui.study.click(function () {
   threads.start(function () {
     console.show();
     study.study()
   })
 })
-
-
-
-
-
-
-
