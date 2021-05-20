@@ -136,7 +136,7 @@ ui.emitter.on("options_item_selected", (e, item) => {
       toast("还没有设置");
       break;
     case "关于":
-      alert("关于", "Code V0.0.3 -alpha1 内测版本");
+      alert("关于", "Code V0.0.3 -alpha2 内测版本");
       break;
   }
   e.consumed = true;
