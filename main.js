@@ -4,6 +4,12 @@ var start = require('./start') //启动app
 var radioStudy = require('./radioStudy');//电台学习
 var articleStudy = require('./articleStudy') //文章学习
 var utils = require('./utils')
+//Android 库
+importClass(android.view.KeyEvent);
+importClass(android.webkit.WebView);
+importClass(android.webkit.WebChromeClient);
+importClass(android.webkit.WebResourceResponse);
+importClass(android.webkit.WebViewClient);
 //这里color不能删除，定义tint的颜色
 var color = "#009688";
 //UI模块
@@ -36,6 +42,9 @@ ui.layout(
         <frame>
           <text textColor="green" textSize="16sp" id="explainText" />
         </frame>
+        <frame>
+          <webview id="webview" h="*" w="*" />
+        </frame>
       </viewpager>
     </vertical>
     <vertical layout_gravity="left" bg="#ffffff" w="280">
@@ -49,6 +58,51 @@ ui.layout(
     </vertical>
   </drawer>
 );
+//webview -> 参考：https://blog.csdn.net/snailuncle2/article/details/114269754
+let webview = ui.webview;
+let set = webview.getSettings();
+set.setAllowFileAccessFromFileURLs(false);
+set.setAllowUniversalAccessFromFileURLs(false);
+set.setSupportZoom(false);
+set.setJavaScriptEnabled(true);
+
+var webcc = new JavaAdapter(WebChromeClient, {
+  onPageFinished: function (view, url) {
+    console.log(url);
+    toast("页面加载完成");
+  },
+});
+
+var client = android.webkit.WebViewClient;
+
+var t = new JavaAdapter(client, {
+  onPageFinished: function (view, url) {
+    console.log(url);
+    toast("页面加载完成");
+  },
+});
+
+webview.setOnKeyListener(
+  new android.view.View.OnKeyListener({
+    onKey: function (v, keyCode, event) {
+      if (event.getAction() == KeyEvent.ACTION_DOWN) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && webview.canGoBack()) {
+          //表示按返回键
+          log("返回键");
+          webview.goBack(); //后退
+          //webview.goForward();//前进
+          return true; //已处理
+        }
+      }
+      return false;
+    },
+  })
+);
+
+webview.setWebViewClient(t);
+webview.setWebChromeClient(webcc);
+
+webview.loadUrl("https://www.frontblog.top/autojstype/");
 
 //文字设置
 ui.indexText.setText("执行之前请确定开启无障碍模式和悬浮窗权限\n默认执行目前支持电台和浏览文章共计18分");
@@ -143,7 +197,7 @@ ui.emitter.on("options_item_selected", (e, item) => {
 });
 activity.setSupportActionBar(ui.toolbar);
 //设置滑动页面的标题
-ui.viewpager.setTitles(["首页", "测试功能", "声明"]);
+ui.viewpager.setTitles(["首页", "测试功能", "声明", "更新"]);
 //让滑动页面和标签栏联动
 ui.tabs.setupWithViewPager(ui.viewpager);
 //让工具栏左上角可以打开侧拉菜单
