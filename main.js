@@ -46,7 +46,7 @@ function login () {
   //登录事件
   ui.login.click(function () {
     var card = ui.card.text()
-    if (card === 'CR568A52089') {
+    if (card === '123456') {//打包的卡密数据不是这个
       toastLog('卡密到期时间为2021-6-21')
       showIndex()
     } else if (card === '') {
