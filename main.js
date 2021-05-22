@@ -4,6 +4,7 @@ var start = require('./start') //启动app
 var radioStudy = require('./radioStudy');//电台学习
 var articleStudy = require('./articleStudy') //文章学习
 var utils = require('./utils')
+var challengeanswer = require('./challengeanswer')
 //Android 库
 importClass(android.view.KeyEvent);
 importClass(android.webkit.WebView);
@@ -220,7 +221,9 @@ function showIndex () {
   //挑战答题
   ui.challenge.click(function () {
     threads.start(function () {
-      toastLog('正在十万火急开发中...')
+      // toastLog('正在十万火急开发中...')
+      console.show();
+      challengeanswer.challengeanswer()
     })
   })
   //训练题库
@@ -256,7 +259,7 @@ function showIndex () {
         toast("还没有设置");
         break;
       case "关于":
-        alert("关于", "Code v0.0.3 -alpha.4 内测版本");
+        alert("关于", "v0.0.3 -alpha.5 内测版本");
         break;
     }
     e.consumed = true;
