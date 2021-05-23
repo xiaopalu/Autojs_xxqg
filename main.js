@@ -93,6 +93,7 @@ function showIndex () {
             <vertical>
               <text textColor="black" textSize="16sp" id="indexText" />
               <button style="Widget.AppCompat.Button.Colored" text="默认执行" id="start" />
+              <button style="Widget.AppCompat.Button.Colored" text="挑战答题" id="challenge" />
               <button style="Widget.AppCompat.Button.Colored"
                 text="开启无障碍"
                 id="auto" />
@@ -102,7 +103,7 @@ function showIndex () {
           <frame>
             <vertical>
               <text textColor="red" textSize="16sp" id="testxText" />
-              <button style="Widget.AppCompat.Button.Colored" text="挑战答题" id="challenge" />
+
               <button style="Widget.AppCompat.Button.Colored" text="训练题库" id="study" />
               <button style="Widget.AppCompat.Button.Colored" text="电台随机测试" id="radiotest" />
             </vertical>
