@@ -2,7 +2,8 @@
 
 # 公告
 
-- 目前没有太多时间维护更新本项目，后续更新打包应用都放在：https://www.frontblog.top/autojstype/，本项目更多更新阅读文档
+- 目前没有太多时间维护更新本项目，后续更新打包应用都放在：https://www.frontblog.top/autojstype/
+- 本项目更多更新阅读文档
 
 # 更新日志
 
