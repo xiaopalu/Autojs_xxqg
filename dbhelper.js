@@ -19,7 +19,7 @@ function getAnswer (question, table_name) {
     return answer;
   }
   else {
-    console.error("题库中未找到答案");
+    // console.error("题库中未找到答案");
     cursor.close();
     return '';
   }
